@@ -60,5 +60,19 @@ then
     exit 1
 fi
 
+# Check that python has mpi4py and h5py
+if ! python -c 'import mpi4py; import h5py' &> /dev/null
+then
+    echo "Python libraries (mpi4py and h5py) are not installed"
+    exit 1
+fi
+
 # Convert the mesh to HDF5 format
 python gmsh2sod2d.py cube -p 1 -r $order
+
+# Define a symbol holding " as a character
+quote='"'
+
+# Modify lines in the part.dat file
+sed -i "2s/.*/gmsh_fileName $quote${mesh_file%.msh}$quote /" part.dat
+sed -i "4s/.*/mesh_h5_fileName $quote${mesh_file%.msh}$quote /" part.dat
