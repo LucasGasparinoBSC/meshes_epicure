@@ -1,5 +1,5 @@
 pi = 3.14159265;
-n = 4;
+n = 60;
 h = 2*pi/n;
 
 //+ Defiine the geometry
@@ -33,7 +33,7 @@ Physical Volume("fluid") = {1};
 Mesh.MshFileVersion = 2.2;
 
 //+ Options controlling mesh generation
-Mesh.ElementOrder = 2;
+Mesh.ElementOrder = 4;
 Mesh 3;                //+ Volumetric mesh
 
 //+ Generate the periodicity between surface pairs

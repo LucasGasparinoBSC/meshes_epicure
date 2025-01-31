@@ -14,25 +14,12 @@ geo_file=$1.geo
 mesh_file=${geo_file%.geo}.msh
 echo "Generating mesh for $geo_file"
 
-# 2nd argument is number of elements per side
-if [ $# -eq 2 ]; then
+if [ $# -eq 3 ]; then
     elements=$2
     echo "Number of elements per side: $elements"
-fi
-
-# Modify the 2nd line of the geo file
-if [ $# -eq 2 ]; then
     sed -i "2s/.*/n = $elements;/" $geo_file
-fi
-
-# 3rd argument is the element order
-if [ $# -eq 3 ]; then
     order=$3
     echo "Element order: $order"
-fi
-
-# Modify line 36 of the geo file
-if [ $# -eq 3 ]; then
     sed -i "36s/.*/Mesh.ElementOrder = $order;/" $geo_file
 fi
 
